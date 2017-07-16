@@ -7,6 +7,9 @@ import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.stereotype.Component;
 
+/**
+ * サンプルで作ったTasklet
+ */
 @Component
 public class SampleTasklet implements Tasklet{
 	private static final Logger LOGGER = Logger.getLogger(SampleTasklet.class);

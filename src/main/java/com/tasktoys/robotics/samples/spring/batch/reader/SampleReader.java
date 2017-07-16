@@ -14,6 +14,9 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
+/**
+ *
+ */
 @Component
 public class SampleReader implements ItemReader<String>{
 
@@ -30,7 +33,7 @@ public class SampleReader implements ItemReader<String>{
 	 * @throws NonTransientResourceException
 	 */
 	@Override
-	public String read() throws Exception, UnexpectedInputException, ParseException, NonTransientResourceException {
+	public String read() throws UnexpectedInputException, ParseException, NonTransientResourceException {
 		if(cnt > 100)
 			return null;
 		cnt++;

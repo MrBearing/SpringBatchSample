@@ -35,17 +35,26 @@ public class BatchConfiguration {
 	private JobBuilderFactory jobBuilderFactory;
 
     /**
-     *
+     * 前後の接続のない場合
      */
     @Autowired
 	private SampleTasklet sampleTasklet;
-	
+
+	/**
+	 * DB やファイルなどからデータを読み込むクラス
+	 */
 	@Autowired
 	private SampleReader sampleReader;
-	
+
+	/**
+	 * 受け取ったデータのデータ変換を行うクラス
+	 */
 	@Autowired
 	private SampleProcessor sampleProcessor;
-	
+
+	/**
+	 * データをDBやファイルなどに出力をするクラス
+	 */
 	@Autowired
 	private SampleWriter sampleWriter;
 
@@ -63,6 +72,10 @@ public class BatchConfiguration {
                 .build();
 	}
 
+	/**
+	 * Taskletはラムダ式で記述することも可能
+	 * @return
+	 */
 	@Bean
 	public Step lambdaStep(){
 		LOGGER.info("lamda");
@@ -71,12 +84,20 @@ public class BatchConfiguration {
         ).build();
     }
 
-    @Bean
+	/**
+	 * 単一のタスクレットを読み込むステップ
+	 * @return
+	 */
+	@Bean
 	public Step testStep(){
 		return stepBuilderFactory.get("test step ")
 				.tasklet(sampleTasklet).build();
 	}
 
+	/**
+	 * Reader -> Processor -> Writerを設定するステップ
+	 * @return
+	 */
 	@Bean
 	public Step testChunkStep(){
 		return stepBuilderFactory.get("chunk step")
